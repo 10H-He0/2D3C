@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private float speed = 10f;
+    private float speed = 8f;
     private Vector3 dir;
     private Rigidbody2D rd;
     public Animator anim;
     public bool isGround = false;
     public int jumpNum = 0;
+
+    public KeyCode Lef = KeyCode.A;
+    public KeyCode Righ = KeyCode.D;
+    public KeyCode Jump = KeyCode.Space;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,15 +30,19 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float H = Mathf.Abs(horizontal);
-        anim.SetFloat("running", H);
-        dir = new Vector3(horizontal, 0).normalized;
-        transform.Translate(dir * speed * Time.deltaTime);
-        if (horizontal < 0)
+        if (Input.GetKey(Lef))
+        {
             transform.localScale = new Vector3(-1, 1, 1);
-        else if (horizontal > 0)
+            transform.Translate(Vector2.left * speed * Time.deltaTime);
+            anim.SetFloat("running", 1);
+        }
+        else if (Input.GetKey(Righ))
+        {
             transform.localScale = new Vector3(1, 1, 1);
+            transform.Translate(Vector2.right * speed * Time.deltaTime);
+            anim.SetFloat("running", 1);
+        }
+        else anim.SetFloat("running", 0);
     }
 
     public float JumpHeight
@@ -54,7 +62,7 @@ public class Player : MonoBehaviour
         }
         else isGround = false;
         if (!isGround && jumpNum == 2) return;
-        bool is_jump = Input.GetKeyDown(KeyCode.Space);
+        bool is_jump = Input.GetKeyDown(Jump);
         if (is_jump) jumpNum++;
         if (rd.velocity.y >= 0)
             anim.SetFloat("jum", rd.velocity.y);
