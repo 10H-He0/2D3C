@@ -43,7 +43,7 @@ public class CreatImage : MonoBehaviour
         Object.transform.position = new Vector3(-12.47276f, 9.216198f, 0);
     }
 
-    private void changeImage(GameObject obj, float x, float y)
+    private static void changeImage(GameObject obj, float x, float y)
     {
         SpriteRenderer spr = obj.GetComponent<SpriteRenderer>();
         spr.size = new Vector2(UnityEngine.Screen.width * x, UnityEngine.Screen.height * y);

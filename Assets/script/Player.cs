@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rd = this.GetComponent<Rigidbody2D>();
-        anim = this.GetComponent<Animator>();
+        //anim = this.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -34,15 +34,15 @@ public class Player : MonoBehaviour
         {
             transform.localScale = new Vector3(-1, 1, 1);
             transform.Translate(Vector2.left * speed * Time.deltaTime);
-            anim.SetFloat("running", 1);
+            //anim.SetFloat("running", 1);
         }
         else if (Input.GetKey(Righ))
         {
             transform.localScale = new Vector3(1, 1, 1);
             transform.Translate(Vector2.right * speed * Time.deltaTime);
-            anim.SetFloat("running", 1);
+            //anim.SetFloat("running", 1);
         }
-        else anim.SetFloat("running", 0);
+        //else anim.SetFloat("running", 0);
     }
 
     public float JumpHeight
@@ -64,12 +64,12 @@ public class Player : MonoBehaviour
         if (!isGround && jumpNum == 2) return;
         bool is_jump = Input.GetKeyDown(Jump);
         if (is_jump) jumpNum++;
-        if (rd.velocity.y >= 0)
-            anim.SetFloat("jum", rd.velocity.y);
-        else anim.Play("drop");
+        //if (rd.velocity.y >= 0)
+            //anim.SetFloat("jum", rd.velocity.y);
+        //else anim.Play("drop");
         if (is_jump)
         {
-            JumpHeight = 50;
+            JumpHeight = 35;
             rd.velocity = jumpVelocity;
         }
     }
